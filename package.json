@@ -1,0 +1,59 @@
+{
+  "name": "shaked-ai-temp",
+  "version": "1.0.0",
+  "description": "Dark Mode Toggle feature implementation with comprehensive analytics, accessibility, and cross-browser support",
+  "main": "src/App.jsx",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "test:a11y": "axe src/",
+    "test:browser": "playwright test",
+    "analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@axe-core/playwright": "^4.7.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "playwright": "^1.36.0",
+    "webpack-bundle-analyzer": "^4.9.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "react",
+    "dark-mode",
+    "accessibility",
+    "analytics",
+    "theme-toggle",
+    "wcag",
+    "cross-browser"
+  ],
+  "author": "AI Course Project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlmondMFB/Shaked-AI-temp.git"
+  }
+}
