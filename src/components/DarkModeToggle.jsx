@@ -1,70 +1,136 @@
 import React from 'react';
-import { useTheme } from '../hooks/useTheme';
-import styles from './DarkModeToggle.module.css';
+import { useTheme } from '../context/ThemeContext';
+import { trackEvent } from '../utils/analytics';
+import './DarkModeToggle.css';
 
-/**
- * Dark Mode Toggle Component
- * Provides a toggle switch to switch between light and dark themes
- * Features: checkbox-style UI, sun/moon icons, tooltip, smooth transitions
- */
 const DarkModeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === 'dark';
+  const { theme, toggleTheme, resetToSystem, isSystemTheme } = useTheme();
 
   const handleToggle = () => {
     toggleTheme();
     
-    // Analytics tracking (Issue #6)
-    if (window.analytics) {
-      window.analytics.track(isDark ? 'dark_mode_disabled' : 'dark_mode_enabled', {
-        timestamp: new Date().toISOString(),
-        previousTheme: theme
+    // Track the toggle action
+    trackEvent('dark_mode_toggled', {
+      new_theme: theme === 'light' ? 'dark' : 'light',
+      previous_theme: theme,
+      interaction_method: 'click'
+    });
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleToggle();
+      
+      trackEvent('dark_mode_toggled', {
+        new_theme: theme === 'light' ? 'dark' : 'light',
+        previous_theme: theme,
+        interaction_method: 'keyboard'
       });
     }
   };
 
+  const handleResetToSystem = () => {
+    resetToSystem();
+    trackEvent('theme_reset_requested', {
+      system_preference: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    });
+  };
+
   return (
-    <div className={styles.toggleContainer}>
-      <label 
-        className={styles.toggleLabel}
-        htmlFor="dark-mode-toggle"
-        title="Toggle Dark Mode"
-      >
-        {/* Sun Icon for Light Mode */}
-        <span 
-          className={`${styles.icon} ${styles.sunIcon} ${!isDark ? styles.active : ''}`}
-          aria-hidden="true"
-        >
-          ☀️
-        </span>
-        
-        {/* Toggle Switch */}
-        <input
-          id="dark-mode-toggle"
-          type="checkbox"
-          checked={isDark}
-          onChange={handleToggle}
-          className={styles.toggleInput}
-          aria-label="Toggle dark mode"
+    <div className="dark-mode-toggle-container">
+      <div className="toggle-group">
+        <button
+          className={`dark-mode-toggle ${theme}`}
+          onClick={handleToggle}
+          onKeyDown={handleKeyDown}
+          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          aria-pressed={theme === 'dark'}
           role="switch"
-          aria-checked={isDark}
-        />
-        
-        <span className={styles.toggleSlider}></span>
-        
-        {/* Moon Icon for Dark Mode */}
-        <span 
-          className={`${styles.icon} ${styles.moonIcon} ${isDark ? styles.active : ''}`}
-          aria-hidden="true"
+          tabIndex={0}
+          type="button"
         >
-          🌙
-        </span>
-      </label>
+          <div className="toggle-track">
+            <div className="toggle-thumb">
+              <span className="toggle-icon" role="img" aria-hidden="true">
+                {theme === 'light' ? '☀️' : '🌙'}
+              </span>
+            </div>
+          </div>
+          <span className="sr-only">
+            {theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          </span>
+        </button>
+        
+        <div className="toggle-info">
+          <span className="current-theme">
+            {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
+            {isSystemTheme && (
+              <span className="system-indicator" title="Following system preference">
+                💻
+              </span>
+            )}
+          </span>
+          
+          {!isSystemTheme && (
+            <button 
+              className="reset-button"
+              onClick={handleResetToSystem}
+              title="Reset to system preference"
+              aria-label="Reset to system theme preference"
+            >
+              Reset to System
+            </button>
+          )}
+        </div>
+      </div>
       
-      {/* Screen Reader Text */}
-      <span className="sr-only">
-        {isDark ? 'Dark mode is enabled' : 'Light mode is enabled'}
-      </span>
+      {/* Additional toggle options for testing */}
+      <div className="toggle-options">
+        <div className="option-item">
+          <label className="option-label">
+            <input
+              type="radio"
+              name="theme-option"
+              value="light"
+              checked={theme === 'light'}
+              onChange={() => {
+                if (theme !== 'light') {
+                  toggleTheme();
+                }
+              }}
+            />
+            <span className="option-text">☀️ Light</span>
+          </label>
+        </div>
+        
+        <div className="option-item">
+          <label className="option-label">
+            <input
+              type="radio"
+              name="theme-option"
+              value="dark"
+              checked={theme === 'dark'}
+              onChange={() => {
+                if (theme !== 'dark') {
+                  toggleTheme();
+                }
+              }}
+            />
+            <span className="option-text">🌙 Dark</span>
+          </label>
+        </div>
+        
+        <div className="option-item">
+          <button
+            className="system-button"
+            onClick={handleResetToSystem}
+            disabled={isSystemTheme}
+          >
+            💻 System
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
