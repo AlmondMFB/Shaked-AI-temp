@@ -1,0 +1,386 @@
+.feature-showcase {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px var(--shadow-color);
+  border-color: var(--primary-color);
+}
+
+.feature-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover:before {
+  opacity: 1;
+}
+
+.feature-header {
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.feature-demo {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--secondary-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.feature-description {
+  margin: 1rem 0;
+}
+
+.feature-description p {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.feature-status {
+  margin-top: 1rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge.implemented {
+  background: var(--success-color-light);
+  color: var(--success-color-dark);
+}
+
+/* Demo Styles */
+.theme-demo {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.demo-box {
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  min-width: 100px;
+  transition: transform 0.2s ease;
+}
+
+.demo-box:hover {
+  transform: scale(1.05);
+}
+
+.light-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dark-box {
+  background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%);
+}
+
+.accessibility-demo {
+  text-align: center;
+}
+
+.contrast-example {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.contrast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contrast-ratio {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--success-color);
+}
+
+.contrast-label {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+}
+
+.performance-demo {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.metric-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+}
+
+.browser-demo {
+  text-align: center;
+}
+
+.browser-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.browser-icon {
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: var(--hover-bg);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.browser-icon:hover {
+  transform: scale(1.2);
+}
+
+.responsive-demo {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.device {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.device:hover {
+  transform: scale(1.2);
+}
+
+.device.desktop {
+  font-size: 2rem;
+}
+
+.device.tablet {
+  font-size: 1.5rem;
+}
+
+.device.mobile {
+  font-size: 1.2rem;
+}
+
+.analytics-demo {
+  text-align: center;
+}
+
+.privacy-badges {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  background: var(--info-color-light);
+  color: var(--info-color-dark);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Technical Details */
+.technical-details {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.technical-details h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.detail-section {
+  background: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.detail-section h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.detail-section ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.detail-section li {
+  margin-bottom: 0.5rem;
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.detail-section li:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .feature-card {
+    padding: 1rem;
+  }
+  
+  .theme-demo,
+  .contrast-example,
+  .performance-demo,
+  .browser-icons,
+  .responsive-demo,
+  .privacy-badges {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .demo-box {
+    min-width: 120px;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .detail-section {
+    padding: 1rem;
+  }
+  
+  .technical-details {
+    padding: 1rem;
+  }
+}
+
+/* Animation for feature cards */
+@keyframes feature-highlight {
+  0% {
+    box-shadow: 0 0 0 0 var(--primary-color-alpha);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.feature-card:focus {
+  animation: feature-highlight 0.6s ease-out;
+  outline: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .feature-card {
+    border-width: 2px;
+  }
+  
+  .demo-box,
+  .browser-icon,
+  .badge {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .feature-card,
+  .demo-box,
+  .browser-icon,
+  .device {
+    transition: none;
+  }
+  
+  .feature-card:hover {
+    transform: none;
+  }
+  
+  .demo-box:hover,
+  .browser-icon:hover,
+  .device:hover {
+    transform: none;
+  }
+}
