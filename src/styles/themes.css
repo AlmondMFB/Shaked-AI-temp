@@ -1,107 +1,281 @@
-/* Theme Variables and Styles */
-/* Implements light and dark mode with proper contrast ratios */
-
+/* CSS Custom Properties for Theme System */
 :root {
-  /* Light Theme Variables */
+  /* Light Theme Colors */
   --light-bg-primary: #ffffff;
   --light-bg-secondary: #f8fafc;
+  --light-bg-card: #ffffff;
   --light-text-primary: #1f2937;
   --light-text-secondary: #6b7280;
   --light-border: #e5e7eb;
+  --light-hover: #f3f4f6;
+  --light-input: #ffffff;
+  --light-button: #f9fafb;
   --light-shadow: rgba(0, 0, 0, 0.1);
   
-  /* Dark Theme Variables */
+  /* Dark Theme Colors */
   --dark-bg-primary: #1a1a1a;
   --dark-bg-secondary: #2d2d2d;
+  --dark-bg-card: #242424;
   --dark-text-primary: #ffffff;
-  --dark-text-secondary: #d1d5db;
-  --dark-border: #374151;
+  --dark-text-secondary: #a3a3a3;
+  --dark-border: #404040;
+  --dark-hover: #363636;
+  --dark-input: #2d2d2d;
+  --dark-button: #363636;
   --dark-shadow: rgba(0, 0, 0, 0.3);
   
-  /* Toggle Component Variables */
-  --toggle-bg-off: #d1d5db;
-  --toggle-bg-on: #3b82f6;
-  --toggle-border: #9ca3af;
-  --toggle-handle: #ffffff;
-  --toggle-handle-active: #ffffff;
+  /* Brand Colors */
+  --primary-color: #3b82f6;
+  --primary-color-light: #60a5fa;
+  --primary-color-dark: #2563eb;
+  --primary-color-alpha: rgba(59, 130, 246, 0.1);
   
-  /* Interactive States */
-  --hover-bg-color: rgba(59, 130, 246, 0.1);
-  --focus-color: #3b82f6;
-  --focus-ring: rgba(59, 130, 246, 0.5);
-  --high-contrast-border: #000000;
+  /* Status Colors */
+  --success-color: #10b981;
+  --success-color-light: #d1fae5;
+  --success-color-dark: #047857;
   
-  /* Transition Settings */
-  --theme-transition: all 0.3s ease-in-out;
+  --warning-color: #f59e0b;
+  --warning-color-light: #fef3c7;
+  --warning-color-dark: #d97706;
+  
+  --error-color: #ef4444;
+  --error-color-light: #fee2e2;
+  --error-color-dark: #dc2626;
+  
+  --info-color: #3b82f6;
+  --info-color-light: #dbeafe;
+  --info-color-dark: #1d4ed8;
+  
+  /* Focus and Interaction */
+  --focus-ring-color: rgba(59, 130, 246, 0.5);
+  --toggle-track-bg: #e5e7eb;
+  --toggle-thumb-bg: #ffffff;
+  --code-bg: #f1f5f9;
 }
 
 /* Light Theme (Default) */
-[data-theme="light"],
-.light {
-  --bg-primary: var(--light-bg-primary);
-  --bg-secondary: var(--light-bg-secondary);
-  --text-primary: var(--light-text-primary);
-  --text-secondary: var(--light-text-secondary);
+html[data-theme="light"] {
+  --background-color: var(--light-bg-primary);
+  --secondary-bg: var(--light-bg-secondary);
+  --card-bg: var(--light-bg-card);
+  --text-color: var(--light-text-primary);
+  --text-color-secondary: var(--light-text-secondary);
   --border-color: var(--light-border);
+  --hover-bg: var(--light-hover);
+  --input-bg: var(--light-input);
+  --button-bg: var(--light-button);
   --shadow-color: var(--light-shadow);
   
-  color-scheme: light;
+  /* Toggle specific colors for light theme */
+  --toggle-track-bg: linear-gradient(45deg, #87CEEB, #98D8E8);
+  --toggle-thumb-bg: #ffffff;
+  --code-bg: #f1f5f9;
 }
 
 /* Dark Theme */
-[data-theme="dark"],
-.dark {
-  --bg-primary: var(--dark-bg-primary);
-  --bg-secondary: var(--dark-bg-secondary);
-  --text-primary: var(--dark-text-primary);
-  --text-secondary: var(--dark-text-secondary);
+html[data-theme="dark"] {
+  --background-color: var(--dark-bg-primary);
+  --secondary-bg: var(--dark-bg-secondary);
+  --card-bg: var(--dark-bg-card);
+  --text-color: var(--dark-text-primary);
+  --text-color-secondary: var(--dark-text-secondary);
   --border-color: var(--dark-border);
+  --hover-bg: var(--dark-hover);
+  --input-bg: var(--dark-input);
+  --button-bg: var(--dark-button);
   --shadow-color: var(--dark-shadow);
   
-  color-scheme: dark;
-  
-  /* Dark mode toggle adjustments */
-  --toggle-bg-off: #4b5563;
-  --toggle-border: #6b7280;
-  --hover-bg-color: rgba(255, 255, 255, 0.1);
-  --high-contrast-border: #ffffff;
+  /* Toggle specific colors for dark theme */
+  --toggle-track-bg: linear-gradient(45deg, #2C3E50, #34495E);
+  --toggle-thumb-bg: var(--background-color);
+  --code-bg: #1e293b;
 }
 
-/* Theme-aware component styles */
-.themed-component {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  transition: var(--theme-transition);
+/* System Theme Detection (Fallback) */
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) {
+    --background-color: var(--light-bg-primary);
+    --secondary-bg: var(--light-bg-secondary);
+    --card-bg: var(--light-bg-card);
+    --text-color: var(--light-text-primary);
+    --text-color-secondary: var(--light-text-secondary);
+    --border-color: var(--light-border);
+    --hover-bg: var(--light-hover);
+    --input-bg: var(--light-input);
+    --button-bg: var(--light-button);
+    --shadow-color: var(--light-shadow);
+    --toggle-track-bg: linear-gradient(45deg, #87CEEB, #98D8E8);
+    --toggle-thumb-bg: #ffffff;
+    --code-bg: #f1f5f9;
+  }
 }
 
-.themed-secondary {
-  background-color: var(--bg-secondary);
-  color: var(--text-secondary);
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --background-color: var(--dark-bg-primary);
+    --secondary-bg: var(--dark-bg-secondary);
+    --card-bg: var(--dark-bg-card);
+    --text-color: var(--dark-text-primary);
+    --text-color-secondary: var(--dark-text-secondary);
+    --border-color: var(--dark-border);
+    --hover-bg: var(--dark-hover);
+    --input-bg: var(--dark-input);
+    --button-bg: var(--dark-button);
+    --shadow-color: var(--dark-shadow);
+    --toggle-track-bg: linear-gradient(45deg, #2C3E50, #34495E);
+    --toggle-thumb-bg: var(--background-color);
+    --code-bg: #1e293b;
+  }
 }
 
-/* Ensure proper contrast ratios */
-/* Light mode: #000000 on #FFFFFF = 21:1 ratio (exceeds 4.5:1) */
-/* Dark mode: #FFFFFF on #1a1a1a = 18.5:1 ratio (exceeds 4.5:1) */
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
 
-/* High contrast mode support */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Transitions */
+html {
+  transition: 
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* High Contrast Mode Support */
 @media (prefers-contrast: high) {
   :root {
-    --light-text-primary: #000000;
-    --dark-text-primary: #ffffff;
-    --light-bg-primary: #ffffff;
-    --dark-bg-primary: #000000;
+    --primary-color: #0066cc;
+    --border-color: #000000;
+    --text-color: #000000;
+  }
+  
+  html[data-theme="dark"] {
+    --primary-color: #4da6ff;
+    --border-color: #ffffff;
+    --text-color: #ffffff;
   }
 }
 
-/* System preference detection */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --bg-primary: var(--dark-bg-primary);
-    --bg-secondary: var(--dark-bg-secondary);
-    --text-primary: var(--dark-text-primary);
-    --text-secondary: var(--dark-text-secondary);
-    --border-color: var(--dark-border);
-    --shadow-color: var(--dark-shadow);
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Print Styles */
+@media print {
+  html {
+    --background-color: white;
+    --text-color: black;
+    --border-color: black;
+  }
+  
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+/* Focus Styles for Accessibility */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Screen Reader Only Text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip Links for Keyboard Navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Theme-aware selection styles */
+::selection {
+  background: var(--primary-color);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color-secondary);
 }
