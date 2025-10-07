@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Dark Mode Toggle - A comprehensive implementation with analytics, accessibility, and cross-browser support"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    
+    <!-- SEO and Social Media Meta Tags -->
+    <meta property="og:title" content="Dark Mode Toggle Demo" />
+    <meta property="og:description" content="A comprehensive dark mode toggle implementation with analytics, accessibility, and cross-browser support" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Accessibility Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="AI Course Project" />
+    
+    <title>Dark Mode Toggle - Complete Implementation</title>
+    
+    <!-- Critical CSS for theme detection -->
+    <style>
+      /* Prevent FOUC (Flash of Unstyled Content) */
+      html {
+        background-color: #ffffff;
+        color: #1f2937;
+      }
+      
+      /* System theme detection */
+      @media (prefers-color-scheme: dark) {
+        html:not([data-theme]) {
+          background-color: #1a1a1a;
+          color: #ffffff;
+        }
+      }
+      
+      /* Loading spinner */
+      .loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 9999;
+      }
+      
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      
+      .loading-text {
+        position: fixed;
+        top: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        font-size: 14px;
+        color: #666;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+        <h1>JavaScript Required</h1>
+        <p>You need to enable JavaScript to run this app.</p>
+        <p>This Dark Mode Toggle demo requires JavaScript for interactive functionality.</p>
+      </div>
+    </noscript>
+    
+    <!-- Loading indicator -->
+    <div id="loading" style="display: block;">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Loading Dark Mode Toggle Demo...</div>
+    </div>
+    
+    <!-- React root element -->
+    <div id="root"></div>
+    
+    <!-- Hide loading spinner once React loads -->
+    <script>
+      // This will be overridden once React loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loading = document.getElementById('loading');
+          if (loading && !document.querySelector('#root').hasChildNodes()) {
+            loading.style.display = 'block';
+          }
+        }, 1000);
+      });
+    </script>
+    
+    <!-- Analytics consent notice -->
+    <script>
+      // Check if analytics consent has been given
+      if (!localStorage.getItem('analytics-consent')) {
+        // This will be handled by the React app, but we set a default
+        localStorage.setItem('analytics-consent', 'false');
+      }
+    </script>
+  </body>
+</html>
